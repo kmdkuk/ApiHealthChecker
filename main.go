@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 )
 
 func main() {
@@ -25,7 +26,7 @@ func main() {
 	)
 
 	if err != nil {
-		fmt.Print(err)
+		fmt.Println(err)
 	}
 
 	if apiErr != nil || (apiRes.StatusCode != 200 && googleRes.StatusCode == 200) {
@@ -42,7 +43,7 @@ func main() {
 		)
 
 		if err != nil {
-			fmt.Print(err)
+			fmt.Println(err)
 		}
 
 		req.Header.Set("Content-Type", "application/json")
@@ -50,11 +51,11 @@ func main() {
 		client := &http.Client{}
 		resp, err := client.Do(req)
 		if err != nil {
-			fmt.Print(err)
+			fmt.Println(err)
 		}
 
 		fmt.Print(resp)
 		defer resp.Body.Close()
 	}
-	fmt.Print("success")
+	fmt.Println(time.Now().Format("2006-01-02 15:04:05"), "success")
 }
